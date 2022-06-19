@@ -35,10 +35,8 @@ int main()
     my_key = ftok("progfile", 65);             // create unique key
     msg_id = msgget(my_key, 0666 | IPC_CREAT); // create message queue and return id
     message.msg_type = 1;
-    // while (1)
-    // {
     char *str;
-#define VAL 10
+    #define VAL 10
     char nf[VAL] = {0};
     char ns[VAL] = {0};
     char *oper = malloc(1);
@@ -52,7 +50,6 @@ int main()
     fgets(oper, 100, stdin);
     strcpy(message.operator, oper);
     res.msg_type = 1;
-    //  = oper;
     msgsnd(msg_id, &message, sizeof(message), 0); // send message
     remove_spaces(message.operator);
     msgrcv(msg_id, &res, sizeof(res), 1, 0);
